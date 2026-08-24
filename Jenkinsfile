@@ -5,11 +5,17 @@ pipeline {
         stage("run frontend") {
             steps {
               echo 'executing yarn....'
+              nodejs('Node-24.08'){
+                  sh 'yarn install'
+              }
             }
         }
         stage("run backend") {
             steps {
               echo 'executing gradle...'
+              withGradle(){
+                  sh '..gradlew -v'
+              }
             }
         }
     }
